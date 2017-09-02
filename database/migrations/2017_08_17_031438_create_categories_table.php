@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+
+use Illuminate\Database\Schema\Blueprint;
+
+use Illuminate\Database\Migrations\Migration;
+
+class CreateCategoriesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+
+        Schema::create('categories', function (Blueprint $table) {
+
+            $table->integer('id')->unsigned();
+
+            $table->primary('id');
+
+            $table->string('categoryName');
+
+            $table->unique('categoryName');
+
+            $table->text('categoryDescription');
+
+            $table->timestamps();
+
+        });
+
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+
+        Schema::dropIfExists('categories');
+
+    }
+
+}
