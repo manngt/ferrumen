@@ -58,8 +58,6 @@ class ProductController extends Controller
     {
         $this->validate(request(),[
 
-        	'productPicture' => 'required',
-
             'productName' => 'required',
 
             'productDescription' => 'required',
@@ -80,17 +78,29 @@ class ProductController extends Controller
 
         ]);
 
-        $request['id'] = time();
+        $product = $request->all();
 
-        $request['productName'] = strtoupper($request['productName']);
+        $product['id'] = time();
 
-        $pictureName = time().'-'.$request['productPicture']->getClientOriginalName();
+        $product['productName'] = strtoupper($request['productName']);
 
-        $request['productPicture'] = $request['productPicture']->move(public_path().'/images/',$pictureName);
 
-        $request['productPicture'] = $pictureName;
+        if($request['productPicture'])
+        {
+            
+            $picture = $product['productPicture'];
 
-        Product::create($request->all());
+            $name = time().'-'.$picture->getClientOriginalName();
+
+            $picture = $picture->move(public_path().'/images/',$name);
+
+            $product['productPicture'] = $name;
+
+            
+        }
+       
+
+        Product::create($product);
 
         return redirect()->route('product.index')
                         ->with('Correcto','Producto creado satisfactoriamente');
@@ -172,9 +182,11 @@ class ProductController extends Controller
 
         $request['productName'] = strtoupper($request['productName']);
 
+        $picture = $request['productPicture']->getClientOriginalName();
+
         $pictureName = time().'-'.$request['productPicture']->getClientOriginalName();
 
-        $request['productPicture'] = $request['productPicture']->move(public_path().'/images/',$pictureName);
+        $picture = $picture->move(public_path().'/images/',$pictureName);
 
         $request['productPicture'] = $pictureName;
 

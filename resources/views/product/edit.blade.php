@@ -17,7 +17,7 @@
 
                             @include('layouts.error')
 
-                            {!! Form::model($product, ['method' => 'PATCH','route' => ['product.update', $product->id]]) !!}
+                            {!! Form::model($product, ['method' => 'PATCH','route' => ['product.update', $product->id,'files'=>'true','class' => 'white-box']]) !!}
 
 
                                 @include('product.form')

@@ -4,9 +4,9 @@
 <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Marcas</h4> </div>
+                        <h4 class="page-title">Productos</h4> </div>
                     <div class="pull-right">
-                    <a class="btn btn-primary" style="background-color:#85B4D0;" href="{{ route('brand.create') }}"> Nueva</a>
+                    <a class="btn btn-primary" style="background-color:#85B4D0;" href="{{ route('product.create') }}"> Nuevo</a>
                 </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -21,18 +21,26 @@
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Marca</th>
+                                            <th>Imagen</th>
+                                            <th>Producto</th>
+                                            <th>Costo</th>
+                                            <th>Precio</th>
+                                            <th>Existencias</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($brands as $brand)
+                                    @foreach($products as $product)
                                         <tr>
-                                            <td style="vertical-align: middle;" >{{ $brand->id}}</td>
-                                            <td style="vertical-align: middle;" >{{ $brand->brandName}} </td>
+                                            <td style="vertical-align: middle;" >{{ $product->id}}</td>
+                                            <td style="vertical-align: middle;" ><img height="100" width="100" class="img-circle" src="/images/{{ $product->productPicture}}"> </td>
+                                            <td style="vertical-align: middle;" >{{ $product->productName}} </td>
+                                            <td style="vertical-align: middle;" >{{ $product->productCost}} </td>
+                                            <td style="vertical-align: middle;" >{{ $product->productPrice}} </td>
+                                            <td style="vertical-align: middle;" >{{ $product->productQuantity}} </td>
                                             <td style="vertical-align: middle;" >
 
-                                            {!! Form::open(['method' => 'GET','route' => ['brand.edit', $brand->id], 'style'=>'display:inline']) !!}
+                                            {!! Form::open(['method' => 'GET','route' => ['product.edit', $product->id], 'style'=>'display:inline']) !!}
                                                 
                                                 <button type="submit" class="btn" style="background-color:transparent;">
                                                     <li class="fa fa-pencil-square-o" style="color:#00BFFF; font-size: 20px; "></li>
@@ -40,7 +48,7 @@
 
                                             {!! Form::close() !!}
                                                 
-                                            {!! Form::open(['method' => 'DELETE','route' => ['brand.destroy', $brand->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
+                                            {!! Form::open(['method' => 'DELETE','route' => ['product.destroy', $product->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
                                         
                                                     <button type="submit" class="btn" style="background-color:transparent; ">
                                                         <li class="btn fa fa-trash-o" style="color:red;font-size: 20px;"></li>
