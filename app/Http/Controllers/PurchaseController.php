@@ -81,7 +81,7 @@ class PurchaseController extends Controller
         $purchase = $request->all();
 
         $purchase['id'] = time();
-        $purchase['purchaseStatus_id'] = 1506790656;
+        $purchase['purchaseStatus_id'] = PurchaseStatus::where('purchaseStatusName','=','INICIAL')->first()->id;
 
         Purchase::create($purchase);
 
