@@ -13,14 +13,26 @@ class Supplier extends Model
 
     						'supplierName',
 
-    						'supplierNit'
+    						'supplierNit',
+
+                            'supplierPhone',
+
+                            'supplierEmail',
+
+                            'supplierAddress'
 
     						];
 
     public function products()
     {
 
-    	return $this->hasMany(Product::class,'suuplier_id','id');
+    	return $this->hasMany(Product::class,'supplier_id','id');
+    }
+
+    public function purchase()
+    {
+
+        return $this->hasMany(Purchase::class,'supplier_id','id');
     }
 
 }

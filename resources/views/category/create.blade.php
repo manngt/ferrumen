@@ -5,7 +5,7 @@
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Crear Categoría</h4> </div>
-                        <a class="btn btn-primary pull-right" style="background-category:#85B4D0;" href="{{ route('category.index') }}"> Regresar</a>
+                        <a class="btn btn-primary pull-right" style="background-color:#85B4D0;" href="{{ route('category.index') }}"> Regresar</a>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->

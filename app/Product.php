@@ -75,4 +75,11 @@ class Product extends Model
 
         return $this->hasMany(ProductMeasure::class,'product_id','id');
     }
+
+    public function purchaseDetail()
+    {
+
+        return $this->hasMany(PurchaseDetail::class,'product_id','id');
+
+    }
 }

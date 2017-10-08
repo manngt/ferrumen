@@ -42,3 +42,15 @@ Route::resource('metric','MetricController');
 
 Route::resource('product','ProductController');
 
+Route::get('/searchproduct','ProductController@searchProduct');
+
+Route::resource('purchasestatus','PurchaseStatusController');
+
+Route::resource('purchase','PurchaseController');
+
+Route::get('/searchpurchase','PurchaseController@searchPurchase');
+
+Route::resource('purchasedetail','PurchaseDetailController');
+
+
+

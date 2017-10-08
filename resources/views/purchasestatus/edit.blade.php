@@ -4,8 +4,8 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Editar Categoría</h4> </div>
-                        <a class="btn btn-primary pull-right" style="background-color:#85B4D0;" href="{{ route('category.index') }}"> Regresar</a>
+                        <h4 class="page-title">Editar Estado de Compra</h4> </div>
+                        <a class="btn btn-primary pull-right" style="background-color:#85B4D0;" href="{{ route('purchasestatus.index') }}"> Regresar</a>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->
@@ -17,10 +17,10 @@
 
                             @include('layouts.error')
 
-                            {!! Form::model($category, ['method' => 'PATCH','route' => ['category.update', $category->id]]) !!}
+                            {!! Form::model($purchasestatus, ['method' => 'PATCH','route' => ['purchasestatus.update', $purchasestatus->id]]) !!}
 
 
-                                @include('category.form')
+                                @include('purchasestatus.form')
 
 
                             {!! Form::close() !!}

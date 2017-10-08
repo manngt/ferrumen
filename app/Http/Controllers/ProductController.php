@@ -18,6 +18,16 @@ use App\Supplier;
 
 class ProductController extends Controller
 {
+
+    public function searchProduct(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('product.index',[
+            'products'=> Product::where('productname','like','%'.$text.'%')->get()]);
+
+    }
     
     public function index()
     {
@@ -136,7 +146,7 @@ class ProductController extends Controller
 
                                         'brands' => Brand::pluck('brandName','id'),
 
-                                        'categories' => Category::pluck('caterogyName','id'),
+                                        'categories' => Category::pluck('categoryName','id'),
 
                                         'colors' => Color::pluck('colorName','id'),
 

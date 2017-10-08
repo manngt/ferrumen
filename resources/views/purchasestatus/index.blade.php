@@ -4,9 +4,9 @@
 <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Categorías</h4> </div>
+                        <h4 class="page-title">Estados de Compra</h4> </div>
                     <div class="pull-right">
-                    <a class="btn btn-primary" style="background-color:#85B4D0;" href="{{ route('category.create') }}"> Nuevo</a>
+                    <a class="btn btn-primary" style="background-color:#85B4D0;" href="{{ route('purchasestatus.create') }}"> Nuevo</a>
                 </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -21,20 +21,20 @@
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Categoría</th>
+                                            <th>Estado</th>
                                             <th>Descripción</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($categories as $category)
+                                    @foreach($purchasestatuses as $purchasestatus)
                                         <tr>
-                                            <td style="vertical-align: middle;" >{{ $category->id}}</td>
-                                            <td style="vertical-align: middle;" >{{ $category->categoryName}} </td>
-                                            <td style="vertical-align: middle;" >{{ $category->categoryDescription}}</td>
+                                            <td style="vertical-align: middle;" >{{ $purchasestatus->id}}</td>
+                                            <td style="vertical-align: middle;" >{{ $purchasestatus->purchaseStatusName}} </td>
+                                            <td style="vertical-align: middle;" >{{ $purchasestatus->purchaseStatusDescription}}</td>
                                             <td style="vertical-align: middle;" >
 
-                                            {!! Form::open(['method' => 'GET','route' => ['category.edit', $category->id], 'style'=>'display:inline']) !!}
+                                            {!! Form::open(['method' => 'GET','route' => ['purchasestatus.edit', $purchasestatus->id], 'style'=>'display:inline']) !!}
                                                 
                                                 <button type="submit" class="btn" style="background-color:transparent;">
                                                     <li class="fa fa-pencil-square-o" style="color:#00BFFF; font-size: 20px; "></li>
@@ -42,7 +42,7 @@
 
                                             {!! Form::close() !!}
                                                 
-                                            {!! Form::open(['method' => 'DELETE','route' => ['category.destroy', $category->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
+                                            {!! Form::open(['method' => 'DELETE','route' => ['purchasestatus.destroy', $purchasestatus->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
                                         
                                                     <button type="submit" class="btn" style="background-color:transparent; ">
                                                         <li class="btn fa fa-trash-o" style="color:red;font-size: 20px;"></li>
