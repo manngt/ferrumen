@@ -160,7 +160,7 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-
+        dd($id);
         $purchase = Purchase::find($id);
 
         PurchaseDetail::where('purchase_id',$purchase->id)->delete();

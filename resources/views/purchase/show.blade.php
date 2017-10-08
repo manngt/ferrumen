@@ -141,8 +141,10 @@
 
                                         {!! Form::close() !!}
 
-                                        {!! Form::open(['method' => 'DELETE','route' => ['purchasedetail.destroy', $purchasedetail->product->id,$purchase->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
+                                        {!! Form::open(['method' => 'DELETE','route' => ['purchasedetail.destroy', $purchasedetail->purchase_id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
 
+                                        {{ Form::text('purchase_id', $purchase->id, array('hidden' => 'hidden')) }}
+                                        {{ Form::text('product_id', $purchasedetail->product->id, array('hidden' => 'hidden')) }}
                                         <button type="submit" class="btn" style="background-color:transparent; ">
                                             <li class="btn fa fa-trash-o" style="color:red;font-size: 20px;"></li>
 

@@ -49,7 +49,7 @@ class PurchaseDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request)
     {
 
         $this->validate(request(),[
@@ -108,7 +108,7 @@ class PurchaseDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
 
         $this->validate(request(),[
@@ -137,15 +137,18 @@ class PurchaseDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $purchasedetail = Purchase::find($id);
 
-        $purchase_id = $purchasedetail->purchase->id;
 
-        $purchasedetail->delete();
+        $purchasedetail = $request->all();
+        $purchase_id = $purchasedetail['purchase_id'];
 
-        return redirect()->route('purchase.show', compact($purchase_id))
+        PurchaseDetail::where('purchase_id','=',$request['purchase_id'])
+            ->where('product_id','=',$request['product_id'])->delete();
+
+
+        return redirect()->route('purchase.show',$purchase_id)
             ->with('Correcto','Producto removido de la compra');
 
     }
