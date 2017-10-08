@@ -77,7 +77,7 @@
                                                 {!! Form::open(['method' => 'GET','route' => ['purchase.show', $purchase->id], 'style'=>'display:inline']) !!}
 
                                                 <button type="submit" class="btn" style="background-color:transparent;">
-                                                    <li class="fa fa-pencil-square-o" style="color:#00BFFF; font-size: 20px; "></li>
+                                                    <li class="fa fa-eye" style="color:#00BFFF; font-size: 20px; "></li>
                                                 </button>
 
                                                 {!! Form::close() !!}

@@ -31,6 +31,9 @@
                     <li>
                         <a href="/product" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><span class="hide-menu">Productos</span></a>
                     </li>
+                    <li>
+                        <a href="/purchase" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><span class="hide-menu">Compras</span></a>
+                    </li>
                     <li class="dropdown">
                     <a href="#" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Catalogos</span></a>
                         <ul class="dropdown">
