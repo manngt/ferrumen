@@ -58,7 +58,9 @@ class PurchaseDetailController extends Controller
 
             'product_id' => 'required',
 
-            'productQuantity' => 'required'
+            'productQuantity' => 'required|numeric|min:1',
+
+            'productPurchaseCost' => 'required|numeric|min:1'
 
         ]);
 
@@ -117,14 +119,23 @@ class PurchaseDetailController extends Controller
 
             'product_id' => 'required',
 
-            'productQuantity' => 'required|numeric|min:1'
+            'productQuantity' => 'required|numeric|min:1',
+
+            'productPurchaseCost' => 'required|numeric|min:1'
 
         ]);
 
         DB::table('purchase_details')
+
         ->where('purchase_id',$request['purchase_id'])
+
         ->where('product_id',$request['product_id'])
-        ->update(['productQuantity'=>$request['productQuantity']]);
+
+        ->update([
+
+            'productQuantity'=>$request['productQuantity'],
+
+            'productPurchaseCost' => $request['productPurchaseCost']]);
 
         return redirect()->route('purchase.show',$request['purchase_id'])
             ->with('Correcto','Producto actualizado en la compra');

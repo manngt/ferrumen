@@ -13,7 +13,9 @@ class PurchaseDetail extends Model
 
         'product_id',
 
-        'productQuantity'
+        'productQuantity',
+
+        'productPurchaseCost'
 
     ];
 
@@ -34,7 +36,7 @@ class PurchaseDetail extends Model
     public function getTotalPrice()
     {
 
-        return $this->productQuantity * $this->product->productPrice;
+        return $this->productQuantity * $this->productPurchaseCost;
 
     }
 

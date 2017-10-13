@@ -52,5 +52,17 @@ Route::get('/searchpurchase','PurchaseController@searchPurchase');
 
 Route::resource('purchasedetail','PurchaseDetailController');
 
+Route::resource('paymentmethod','PaymentMethodController');
+
+Route::resource('salestatus','SaleStatusController');
+
+Route::resource('customer','CustomerController');
+
+Route::get('/searchsale','SaleController@searchSale');
+
+Route::resource('sale','SaleController');
+
+Route::resource('saledetail','SaleDetailController');
+
 
 

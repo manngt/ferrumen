@@ -97,11 +97,15 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
+
+        $supplier = Purchase::find($id)->supplier_id;
+
         return view('purchase.show',[
 
             'purchase' => Purchase::find($id),
 
-            'products' => Product::pluck('productName','id')
+            'products' => Product::where('supplier_id','=', $supplier)
+                ->pluck('productName','id')
 
         ]);
     }

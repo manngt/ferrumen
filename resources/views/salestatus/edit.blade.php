@@ -4,8 +4,8 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Editar Compra</h4> </div>
-                        <a class="btn btn-primary pull-right" style="background-color:#85B4D0;" href="{{ route('purchase.show',$purchasedetail->purchase_id) }}"> Regresar</a>
+                        <h4 class="page-title">Editar Estado de Venta</h4> </div>
+                        <a class="btn btn-primary pull-right" style="background-color:#85B4D0;" href="{{ route('salestatus.index') }}"> Regresar</a>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->
@@ -13,14 +13,14 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     
                         <div class="white-box">
-                            <h3 class="box-title">Actualizar cantidad y costo</h3>
+                            <h3 class="box-title">Nuevo Ingreso</h3>
 
                             @include('layouts.error')
 
-                            {!! Form::model($purchasedetail, ['method' => 'PATCH','route' => ['purchasedetail.update', $purchasedetail->purchase_id]]) !!}
+                            {!! Form::model($salestatus, ['method' => 'PATCH','route' => ['salestatus.update', $salestatus->id]]) !!}
 
 
-                            @include('purchasedetail.form')
+                                @include('salestatus.form')
 
 
                             {!! Form::close() !!}
