@@ -196,15 +196,12 @@ class ProductController extends Controller
 
         $product['productName'] = strtoupper($request['productName']);
 
-
         if($request['productPicture'])
         {
 
             $picture = $product['productPicture'];
 
-            $originalname = $request->file('productPicture')->getClientOriginalName();
-
-            $name = time().'-'.$originalname;
+            $name = time().'-'.$picture->getClientOriginalName();
 
             $picture = $picture->move(public_path().'/images/',$name);
 
