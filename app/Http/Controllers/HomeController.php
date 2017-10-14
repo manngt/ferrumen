@@ -19,7 +19,7 @@ class HomeController extends Controller
         $purchasereceived = count(Purchase::where('purchaseStatus_id','=',$statusreceived_id)->get());
         $purchasepercent = round(($purchasereceived/$purchasequantity) * 100,0);
 
-        $productlowquantity = count(Product::where('productQuantity','<',10));
+        $productlowquantity = count(Product::where('productQuantity','<',10)->get());
         $productquantity = count(Product::all());
         $productpercent = round(($productlowquantity/$productquantity)*100,0);
 
