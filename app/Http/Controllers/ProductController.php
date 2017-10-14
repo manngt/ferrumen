@@ -192,13 +192,17 @@ class ProductController extends Controller
 
         $request['productName'] = strtoupper($request['productName']);
 
-        $picture = $request['productPicture']->getClientOriginalName();
+        $name = time().'-'.$picture->getClientOriginalName();
 
         $pictureName = time().'-'.$request['productPicture']->getClientOriginalName();
 
-        $picture = $picture->move(public_path().'/images/',$pictureName);
+        $picture = $picture->move(public_path().'/images/',$name);
 
         $request['productPicture'] = $pictureName;
+        
+
+
+        $product['productPicture'] = $name;
 
         Product::find($id)->update($request->all());
 
