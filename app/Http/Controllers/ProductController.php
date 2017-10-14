@@ -202,7 +202,7 @@ class ProductController extends Controller
 
             $picture = $product['productPicture'];
 
-            $name = time().'-'.$picture->getClientOriginalName;
+            $name = time().'-'.$request['productPicture']->getClientOriginalName();
 
             $picture = $picture->move(public_path().'/images/',$name);
 
