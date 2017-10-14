@@ -190,20 +190,29 @@ class ProductController extends Controller
 
         ]);
 
-        $request['productName'] = strtoupper($request['productName']);
+        $product = $request->all();
 
-        $picture = $product['productPicture'];
+        $product['id'] = time();
 
-        $name = time().'-'.$picture->getClientOriginalName();
+        $product['productName'] = strtoupper($request['productName']);
 
-        $pictureName = time().'-'.$request['productPicture']->getClientOriginalName();
 
-        $picture = $picture->move(public_path().'/images/',$name);
+        if($request['productPicture'])
+        {
 
-        $request['productPicture'] = $pictureName;
-        
+            $picture = $product['productPicture'];
 
-        Product::find($id)->update($request->all());
+            $name = time().'-'.$picture->getClientOriginalName();
+
+            $picture = $picture->move(public_path().'/images/',$name);
+
+            $product['productPicture'] = $name;
+
+
+        }
+
+
+        Product::find($id)->update($product);
 
         return redirect()->route('product.index')
                         ->with('Correcto','Producto actualizado satisfactoriamente');
