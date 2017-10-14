@@ -62,4 +62,16 @@ class Sale extends Model
         return $total;
 
     }
+
+    public function getTotalPaymentAmount()
+    {
+        $total = 0;
+
+        foreach($this->payment as $payment)
+        {
+            $total += $payment->paymentAmount;
+        }
+
+        return $total;
+    }
 }

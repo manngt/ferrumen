@@ -10,7 +10,7 @@
 
     {!! Form::label('purchaseReceptionDateLabel', 'Fecha de recepción') !!}
 
-    {!! Form::text('purchaseReceptionDate', null, array('placeholder' => 'Nombre del purchaseo','class' =>
+    {!! Form::text('purchaseReceptionDate', null, array('placeholder' => '¿Cuando se recibe la compra','class' =>
 'form-control')) !!}
 
 </div>

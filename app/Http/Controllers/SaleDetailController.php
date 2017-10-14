@@ -57,9 +57,26 @@ class SaleDetailController extends Controller
 
         $saledetail = $request->all();
 
+        $sd = SaleDetail::where('sale_id','=',$saledetail['sale_id'])
+            ->where('product_id','=',$saledetail['product_id'])->first();
+
+        if(Product::find($saledetail['product_id'])->productQuantity < $saledetail['productSaleQuantity'])
+        {
+            return redirect()->route('sale.show', $request['sale_id'])
+                ->with('Incorrecto','Hay menos producto del solicitado');
+        }
+
+        if(!empty($sd))
+        {
+            return redirect()->route('sale.show', $request['sale_id'])
+                ->with('Incorrecto','Ya existe el producto en esta venta');
+        }
+
         $saledetail['id'] = time();
 
         $saledetail['productSalePrice'] = Product::find($saledetail['product_id'])->productPrice;
+
+        Product::find($saledetail['product_id'])->decrease($saledetail['product_id'],$saledetail['productSaleQuantity']);
 
         SaleDetail::create($saledetail);
 
@@ -135,8 +152,9 @@ class SaleDetailController extends Controller
     public function destroy($id)
     {
 
-
         $saledetail = SaleDetail::find($id);
+
+        Product::find($saledetail['product_id'])->increase($saledetail['product_id'],$saledetail->productSaleQuantity);
 
         $sale = $saledetail->sale_id;
 

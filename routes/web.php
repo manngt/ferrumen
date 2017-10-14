@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('index');
 });
+*/
 
 
 Route::get('/user', function () {
@@ -27,6 +28,8 @@ Route::get('/productdetail', function () {
 Route::get('/form', function () {
     return view('form');
 });
+
+Route::resource('/','HomeController');
 
 Route::resource('brand','BrandController');
 
@@ -63,6 +66,8 @@ Route::get('/searchsale','SaleController@searchSale');
 Route::resource('sale','SaleController');
 
 Route::resource('saledetail','SaleDetailController');
+
+Route::resource('payment','PaymentController');
 
 
 

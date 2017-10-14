@@ -105,7 +105,9 @@ class PurchaseController extends Controller
             'purchase' => Purchase::find($id),
 
             'products' => Product::where('supplier_id','=', $supplier)
-                ->pluck('productName','id')
+                ->pluck('productName','id'),
+
+            'purchasestatus' => PurchaseStatus::pluck('purchaseStatusName','id')
 
         ]);
     }
@@ -139,6 +141,7 @@ class PurchaseController extends Controller
     public function update(Request $request, $id)
     {
 
+
         $this->validate(request(),[
 
             'purchaseStatus_id' => 'required',
@@ -149,9 +152,30 @@ class PurchaseController extends Controller
 
         ]);
 
-        Purchase::find($id)->update($request->all());
+        $purchase = Purchase::find($id);
 
-        return redirect()->route('purchase.index')
+        $purchasestatus = PurchaseStatus::find($request['purchaseStatus_id']);
+
+        if($purchasestatus->purchaseStatusName = 'RECIBIDA')
+        {
+
+            if(count($purchase->purchaseDetail)>0){
+
+                foreach ($purchase->purchasedetail as $pd)
+                {
+
+                    Product::find($pd->product_id)->increase($pd->product_id,$pd->productQuantity);
+
+                }
+
+            }
+
+        }
+
+
+       $purchase->update($request->all());
+
+        return redirect()->route('purchase.show',$id)
             ->with('Correcto','Compra actualizada correctamente');
 
     }

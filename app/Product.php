@@ -89,4 +89,26 @@ class Product extends Model
         return $this->hasMany(SaleDetail::class,'product_id','id');
 
     }
+
+    public function decrease($id,$quantity)
+    {
+
+        $actualQuantity = Product::find($id)->productQuantity;
+
+        $newQuantity = $actualQuantity - $quantity;
+
+        $this->update(['productQuantity' => $newQuantity]);
+
+    }
+
+    public function increase($id,$quantity)
+    {
+
+        $actualQuantity = Product::find($id)->productQuantity;
+
+        $newQuantity = $actualQuantity + $quantity;
+
+        $this->update(['productQuantity' => $newQuantity]);
+
+    }
 }

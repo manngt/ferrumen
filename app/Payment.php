@@ -13,7 +13,9 @@ class Payment extends Model
 
         'sale_id',
 
-        'paymentMethod_id'
+        'paymentMethod_id',
+
+        'paymentAmount'
 
     ];
 

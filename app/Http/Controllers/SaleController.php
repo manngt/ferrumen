@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\PaymentMethod;
 use App\Product;
 use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 use App\Sale;
@@ -13,6 +15,8 @@ use App\SaleDetail;
 use App\SaleStatus;
 
 use App\Customer;
+
+use App\Payment;
 
 class SaleController extends Controller
 {
@@ -106,7 +110,9 @@ class SaleController extends Controller
 
             'sale' => Sale::find($id),
 
-            'products' => Product::where('productQuantity','>',0)->pluck('productName','id')
+            'products' => Product::where('productQuantity','>',0)->pluck('productName','id'),
+
+            'paymentmethods' => PaymentMethod::pluck('paymentMethodName','id')
 
         ]);
     }
@@ -171,7 +177,19 @@ class SaleController extends Controller
     {
         $sale = Sale::find($id);
 
+        if(count($sale->saleDetail) > 0)
+        {
+
+            foreach ($sale->saleDetail as $saledetail)
+            {
+                Product::find($saledetail['product_id'])->increase($saledetail['product_id'],$saledetail->productSaleQuantity);
+            }
+
+        }
+
         SaleDetail::where('sale_id',$sale->id)->delete();
+
+        Payment::where('sale_id',$sale->id)->delete();
 
         $sale->delete();
 

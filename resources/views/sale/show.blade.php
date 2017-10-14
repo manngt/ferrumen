@@ -193,6 +193,66 @@
                         <div class="panel-footer pull-right"><strong>Total:</strong>
                             {!! ' Q. '.number_format($sale->getTotalAmount(),2) !!}
                         </div>
+                        <div class="panel-footer pull-right col-sm-12"><strong>Pagos:</strong>
+                            {!! Form::open(array('route' => 'payment.store','method'=>'POST','files'=>'true')) !!}
+
+                                {{ Form::text('sale_id', $sale->id, array('hidden' => 'hidden')) }}
+
+                                {!! Form::label('paymentMethodLabel', 'Metodo de pago') !!}
+
+                                {!! Form::select('paymentMethod_id', $paymentmethods,null, array('class' => 'form-control')) !!}
+
+                                {!! Form::label('paymentAmountLabel', 'Monto') !!}
+
+                                {!! Form::number('paymentAmount', null, array('placeholder' => 'Monto Q.','class' => 'form-control','step'=>'any')) !!}
+                                   <br>
+                                {!!Form::submit('Aplicar',array('class'=>'btn btn-success text-center'))!!}
+
+                            {!! Form::close() !!}
+                            <br>
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="">Metodo de pago</th>
+                                    <th class="col-sm-3">Monto</th>
+                                    <th class="">Opciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($sale->payment as $payment)
+
+                                    <tr>
+                                        <td class="">{{ $payment->paymentMethod->paymentMethodName }}</td>
+                                        <td class="">{{ 'Q. '.number_format($payment->paymentAmount,2) }}</td>
+                                        <td style="vertical-align: middle;" >
+
+                                            {!! Form::open(['method' => 'GET','route' => ['payment.edit',$payment->id], 'style'=>'display:inline']) !!}
+
+
+                                            <button type="submit" class="btn" style="background-color:transparent;">
+                                                <li class="fa fa-pencil-square-o" style="color:#00BFFF; font-size: 20px; "></li>
+                                            </button>
+
+                                            {!! Form::close() !!}
+
+                                            {!! Form::open(['method' => 'DELETE','route' => ['payment.destroy', $payment->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
+
+                                            <button type="submit" class="btn" style="background-color:transparent; ">
+                                                <li class="btn fa fa-trash-o" style="color:red;font-size: 20px;"></li>
+
+                                            </button>
+
+                                            {!! Form::close() !!}
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <div class="panel-footer pull-right"><strong>Monto Pagado:</strong>
+                                {!! ' Q. '.number_format($sale->getTotalPaymentAmount(),2) !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

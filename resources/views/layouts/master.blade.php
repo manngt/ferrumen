@@ -35,9 +35,7 @@
 
 <body>
     <!-- Preloader -->
-    <div class="preloader">
-        <div class="cssload-speeding-wheel"></div>
-    </div>
+
     <div id="wrapper">
 
         @include('layouts.nav')
@@ -68,19 +66,6 @@
     <script src="/js/custom.min.js"></script>
     <script src="/js/dashboard1.js"></script>
     <script src="/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $.toast({
-            heading: 'Bienvenido',
-            text: 'Aquí podras administrar el inventario',
-            position: 'top-right',
-            loaderBg: '#ff6849',
-            icon: 'info',
-            hideAfter: 3500,
-            stack: 6
-        })
-    });
-    </script>
 
     <script src="/colorpicker/mcColorPicker.js" type="text/javascript"></script>
 

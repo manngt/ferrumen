@@ -65,7 +65,7 @@
                                 </div>
                             </div> <!-- row -->
                         </div> <!-- panel heading -->
-                        <div   class="roW panel-heading">
+                        <div   class="row panel-heading">
                             {!! Form::open(array('route' => 'purchasedetail.store','method'=>'POST','files'=>'true')) !!}
                             <div class="col-md-12" style="background-color:white;">
 
@@ -124,6 +124,27 @@
                             <br>
                             {!! Form::close() !!}
                         </div>
+
+                        <div class="row panel-heading">
+
+                            {!! Form::model($purchase, ['method' => 'PATCH','route' => ['purchase.update', $purchase->id]]) !!}
+
+                                {{ Form::text('supplier_id', $purchase->supplier_id, array('hidden' => 'hidden')) }}
+
+                                {{ Form::text('purchaseReceptionDate', $purchase->purchaseReceptionDate, array('hidden' => 'hidden')) }}
+
+                                {!! Form::label('purchaseStatusLabel', 'Estado') !!}
+
+                                {!! Form::select('purchaseStatus_id', $purchasestatus,null, array('class' => 'form-control')) !!}
+
+                                <br>
+
+                                {!!Form::submit('Guardar',array('class'=>'btn btn-success'))!!}
+
+                            {!! Form::close() !!}
+
+                        </div>
+
 
                         <div class="panel-body">
                             <h3 class="panel-title col-sm-12">Detalle</h3>
