@@ -201,10 +201,7 @@ class ProductController extends Controller
         $picture = $picture->move(public_path().'/images/',$name);
 
         $request['productPicture'] = $pictureName;
-
-
-
-        $product['productPicture'] = $name;
+        
 
         Product::find($id)->update($request->all());
 
