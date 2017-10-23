@@ -87,7 +87,13 @@ class SaleController extends Controller
         $sale = $request->all();
 
         $sale['id'] = time();
-        $sale['saleStatus_id'] = SaleStatus::where('saleStatusName','=','EN PROCESO')->first()->id;
+
+        $sale['saleStatus_id'] = SaleStatus::where('saleStatusName','=','EN PROCESO')
+
+            ->first()
+
+            ->id;
+
         $sale['issueDate'] = Carbon::now();
 
         Sale::create($sale);
@@ -146,24 +152,73 @@ class SaleController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate(request(),[
+        if($request['saleStatusName'])
+        {
+            $salestatusid = SaleStatus::where('saleStatusName','=',$request['saleStatusName'])
 
-            'saleStatus_id' => 'required',
+                ->first()
+
+                ->id;
+
+            $request['saleStatus_id'] = $salestatusid;
+
+            $sale = Sale::find($id);
+
+            if($sale->isFinished() && $request['saleStatusName'] == 'CANCELADA')
+            {
+                foreach($sale->saleDetail as $sd)
+                {
+                    Product::find($sd->product_id)->increase($sd->product_id,$sd->productSaleQuantity);
+                }
+            }
+
+            if($sale->isCanceled() && $request['saleStatusName'] == 'FINALIZADA')
+            {
+               return redirect()->route('sale.show',$id)
+
+                   ->with('Incorrecto','La venta ha sido cancelada');
+            }
+
+            $sale->update($request->all());
+
+            return redirect()->route('sale.show',$id)
+
+                ->with('Correcto','Venta actualizada correctamente');
+
+        }
+
+        $this->validate(request(),[
 
             'customer_id' => 'required',
 
             'invoiceSerial' => 'required',
 
-            'issueDate' => 'required',
-
-            'saleStatus_id' => 'required'
+            'issueDate' => 'required'
 
         ]);
 
+        $sale = Sale::find($id);
+
+        if($sale->isFinished() || $sale->isCanceled())
+        {
+            return redirect()->route('sale.show',$sale->id)
+
+                ->with('Incorrecto','La venta no se puede modificar esta finalizada o cancelada');
+        }
+
+        if(count($sale->saleDetail)>0)
+        {
+            return redirect()->route('sale.show',$sale->id)
+
+                ->with('Incorrecto','La venta no se puede moficiar, contiene productos');
+        }
+
         Sale::find($id)->update($request->all());
 
-        return redirect()->route('sale.index')
+        return redirect()->route('sale.show',$id)
+
             ->with('Correcto','Venta actualizada correctamente');
+
 
     }
 
@@ -176,6 +231,13 @@ class SaleController extends Controller
     public function destroy($id)
     {
         $sale = Sale::find($id);
+
+        if($sale->isFinished() || $sale->isCanceled())
+        {
+            return redirect()->route('sale.show',$sale->id)
+
+                ->with('Incorrecto','La venta esta finalizada o cancelada');
+        }
 
         if(count($sale->saleDetail) > 0)
         {

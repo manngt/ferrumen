@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Magnitude;
+use App\Metric;
+use App\ProductMeasure;
 use Illuminate\Http\Request;
 
 use App\Product;
@@ -25,7 +28,10 @@ class ProductController extends Controller
 
 
         return view('product.index',[
-            'products'=> Product::where('productname','like','%'.$text.'%')->get()]);
+
+            'products'=> Product::where('productname','like','%'.$text.'%')->get()
+
+        ]);
 
     }
     
@@ -47,15 +53,16 @@ class ProductController extends Controller
         
         return view('product.create',[
 
-                                        'brands' => Brand::pluck('brandName','id'),
+            'brands' => Brand::pluck('brandName','id'),
 
-                                        'categories' => Category::pluck('categoryName','id'),
+            'categories' => Category::pluck('categoryName','id'),
 
-                                        'colors' => Color::pluck('colorName','id'),
+            'colors' => Color::pluck('colorName','id'),
 
-                                        'suppliers' => Supplier::pluck('supplierName','id')
+            'suppliers' => Supplier::pluck('supplierName','id')
 
-                                    ]);
+        ]);
+
     }
 
     /**
@@ -108,12 +115,18 @@ class ProductController extends Controller
 
             
         }
+
+        if(!$request['productDiscount']){
+
+            $product['productDiscount'] = 0;
+
+        }
        
 
         Product::create($product);
 
         return redirect()->route('product.index')
-                        ->with('Correcto','Producto creado satisfactoriamente');
+            ->with('Correcto','Producto creado satisfactoriamente');
     }
 
     /**
@@ -127,7 +140,15 @@ class ProductController extends Controller
 
     	$product = Product::find($id);
         
-        return view('product.show',compact('product'));
+        return view('product.show',[
+
+            'product'=>$product,
+
+            'magnitudes' => Magnitude::pluck('magnitudeName','id'),
+
+            'metrics' => Metric::pluck('metricName','id')
+
+        ]);
 
     }
 
@@ -142,17 +163,18 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         return view('product.edit', [
-                                        'product' => Product::find($id),
 
-                                        'brands' => Brand::pluck('brandName','id'),
+            'product' => Product::find($id),
 
-                                        'categories' => Category::pluck('categoryName','id'),
+            'brands' => Brand::pluck('brandName','id'),
 
-                                        'colors' => Color::pluck('colorName','id'),
+            'categories' => Category::pluck('categoryName','id'),
 
-                                        'suppliers' => Supplier::pluck('supplierName','id')
+            'colors' => Color::pluck('colorName','id'),
 
-                                    ]);
+            'suppliers' => Supplier::pluck('supplierName','id')
+
+        ]);
 
     }
 
@@ -167,8 +189,6 @@ class ProductController extends Controller
     {
 
         $this->validate(request(),[
-
-        	'productPicture' => 'required',
 
             'productName' => 'required',
 
@@ -227,7 +247,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         
-        Product::find($id)->delete();
+        $product = Product::find($id);
+
+        ProductMeasure::where('product_id','=',$product->id)->delete();
+
+        $product->delete();
+
 
         return redirect()->route('product.index')
                         ->with('Correcto','Producto eliminado satisfactoriamente');

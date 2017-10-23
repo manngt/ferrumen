@@ -1,7 +1,11 @@
-
   <div class="form-group">
     {!! Form::label('purchasestatusNameLabel', 'Estado') !!}
     {!! Form::text('purchaseStatusName', null, array('placeholder' => 'El estado de la compra','class' => 'form-control')) !!}
+  </div>
+
+  <div class="form-group">
+    {!! Form::label('purchaseStatusSequenceLabel', 'Secuencia') !!}
+    {!! Form::text('purchaseStatusSequence', null, array('placeholder' => 'Orden del estado','class' => 'form-control')) !!}
   </div>
 
    <div class="form-group">

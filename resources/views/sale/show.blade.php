@@ -72,8 +72,18 @@
                                 <div class="col-md-3 target" style="background-color:white;">
                                     <div class="form-group">
                                         {!! Form::label('idLabel', 'ID',array('class'=>'col-sm-2')) !!}
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             {!! Form::text('id', $sale->id, array('disabled'=>'disabled','class' =>
+'form-control')) !!}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5 target" style="background-color:white;">
+                                    <div class="form-group">
+                                        {!! Form::label('saleStatusNameLabel', 'Estado',array('class'=>'col-sm-2')) !!}
+                                        <div class="col-sm-5">
+                                            {!! Form::text('id', $sale->saleStatus->saleStatusName, array('disabled'=>'disabled','class' =>
 'form-control')) !!}
                                         </div>
                                     </div>
@@ -151,6 +161,7 @@
                                     <th class="col-sm-3">Producto</th>
                                     <th class="col-sm-3">Descripción</th>
                                     <th class="">Precio</th>
+                                    <th>Descuento</th>
                                     <th class="">Importe</th>
                                     <th class="">Opciones</th>
                                 </tr>
@@ -163,6 +174,7 @@
                                     <td class="">{{ $saledetail->product->productName }}  </td>
                                     <td class="">{{ $saledetail->product->productDescription }}</td>
                                     <td class="">{{ 'Q. '.number_format($saledetail->productSalePrice,2) }}</td>
+                                    <td class="">{{ 'Q. '.number_format($saledetail->productSaleDiscount,2) }}</td>
                                     <td class="">{{ 'Q. '.number_format($saledetail->getTotalprice(),2) }}</td>
                                     <td style="vertical-align: middle;" >
 
@@ -204,12 +216,42 @@
 
                                 {!! Form::label('paymentAmountLabel', 'Monto') !!}
 
-                                {!! Form::number('paymentAmount', null, array('placeholder' => 'Monto Q.','class' => 'form-control','step'=>'any')) !!}
+                                {!! Form::number('paymentAmount', null, array('placeholder' => 'Monto Q.','class' => 'form-control','step'=>'any','max' => $sale->diffAmount())) !!}
                                    <br>
-                                {!!Form::submit('Aplicar',array('class'=>'btn btn-success text-center'))!!}
+
+                                @if($sale->isPaided())
+                                {!!Form::submit('Aplicar',array('class'=>'btn btn-info text-center','disabled' => 'disabled'))!!}
+                                @else
+                                {!!Form::submit('Aplicar',array('class'=>'btn btn-info text-center'))!!}
+                                @endif
+
+
 
                             {!! Form::close() !!}
                             <br>
+                            @if($sale->isPaided() && !$sale->isCanceled() && !$sale->isFinished())
+
+                                {!! Form::model($sale, ['method' => 'PATCH','route' => ['sale.update', $sale->id]]) !!}
+
+                                {{ Form::hidden('saleStatusName', 'FINALIZADA') }}
+
+                                <br>
+
+                                {!!Form::submit('FINALIZAR',array('class'=>'btn btn-success'))!!}
+
+                                {!! Form::close() !!}
+
+                            @endif
+                            <br>
+                            @if($sale->isFinished() && !$sale->isCanceled())
+                                {!! Form::model($sale,['method' => 'PATCH','route' => ['sale.update', $sale->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
+
+                                {{ Form::hidden('saleStatusName', 'CANCELADA') }}
+
+                                {!!Form::submit('CANCELAR VENTA',array('class'=>'btn btn-danger'))!!}
+
+                                {!! Form::close() !!}
+                            @endif
                             <table class="table table-condensed">
                                 <thead>
                                 <tr>
@@ -237,7 +279,9 @@
 
                                             {!! Form::open(['method' => 'DELETE','route' => ['payment.destroy', $payment->id], 'style'=>'display:inline' ,'onsubmit' => 'return confirm("¿Estás segura(o)?")']) !!}
 
-                                            <button type="submit" class="btn" style="background-color:transparent; ">
+
+                                            <button type="submit" class="btn" style="background-color:transparent;">
+
                                                 <li class="btn fa fa-trash-o" style="color:red;font-size: 20px;"></li>
 
                                             </button>
@@ -249,6 +293,9 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div class="panel-footer pull-right"><strong>Pendiente:</strong>
+                                {!! ' Q. '.number_format(($sale->getTotalAmount()-$sale->getTotalPaymentAmount()),2) !!}
+                            </div>
                             <div class="panel-footer pull-right"><strong>Monto Pagado:</strong>
                                 {!! ' Q. '.number_format($sale->getTotalPaymentAmount(),2) !!}
                             </div>

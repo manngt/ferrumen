@@ -62,7 +62,10 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('supplier.show',[
+
+            'supplier' => Supplier::find($id)
+        ]);
     }
 
     /**
@@ -93,7 +96,9 @@ class SupplierController extends Controller
 
             'supplierName' => 'required',
 
-            'supplierNit' => 'required'
+            'supplierNit' => 'required',
+
+            'supplierAddress' => 'required'
 
         ]);
 

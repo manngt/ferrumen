@@ -120,6 +120,15 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
+        $purchasedetail= count(Purchase::find($id)->purchaseDetail);
+
+        if($purchasedetail>0)
+        {
+            return redirect()->route('purchase.show',$id)
+
+                ->with('Incorrecto','No puede editar la compra, tiene productos');
+        }
+
         return view('purchase.edit',[
 
             'purchase' => Purchase::find($id),
@@ -154,9 +163,17 @@ class PurchaseController extends Controller
 
         $purchase = Purchase::find($id);
 
+
+        if($purchase->purchaseStatus->purchaseStatusSequence > PurchaseStatus::find($request['purchaseStatus_id'])->purchaseStatusSequence)
+        {
+            return redirect()->route('purchase.show',$id)
+
+                ->with('Incorrecto','No se puede regresar a un estado anterior');
+        }
+
         $purchasestatus = PurchaseStatus::find($request['purchaseStatus_id']);
 
-        if($purchasestatus->purchaseStatusName = 'RECIBIDA')
+        if($purchasestatus->purchaseStatusName == 'RECIBIDA')
         {
 
             if(count($purchase->purchaseDetail)>0){
@@ -172,10 +189,27 @@ class PurchaseController extends Controller
 
         }
 
+        if($purchase->isReceived() && $purchasestatus->purchaseStatusName == 'CANCELADA')
+        {
+
+            if(count($purchase->purchaseDetail)>0){
+
+                foreach ($purchase->purchasedetail as $pd)
+                {
+
+                    Product::find($pd->product_id)->decrease($pd->product_id,$pd->productQuantity);
+
+                }
+
+            }
+
+        }
+
 
        $purchase->update($request->all());
 
         return redirect()->route('purchase.show',$id)
+
             ->with('Correcto','Compra actualizada correctamente');
 
     }
@@ -188,14 +222,25 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
         $purchase = Purchase::find($id);
+
+
+        if($purchase->purchaseStatus->purchaseStatusSequence > 1)
+        {
+
+            return redirect()->route('purchase.index')
+
+                ->with('Incorrecto','La compra solo puede ser cancelada');
+
+        }
+
 
         PurchaseDetail::where('purchase_id',$purchase->id)->delete();
 
         $purchase->delete();
 
         return redirect()->route('purchase.index')
+
             ->with('Correcto','Compra eliminada satisfactoriament');
 
     }

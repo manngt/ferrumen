@@ -64,6 +64,17 @@ class PurchaseDetailController extends Controller
 
         ]);
 
+        $purchase = Purchase::find($request['purchase_id']);
+
+        if($purchase->purchaseStatus->purchaseStatusSequence > 1)
+        {
+
+            return redirect()->route('purchase.show',$request['purchase_id'])
+
+                ->with('Incorrecto','No pueden agregar productos en el estado actual');
+
+        }
+
         PurchaseDetail::create($request->all());
 
         return redirect()->route('purchase.show', $request['purchase_id'])
@@ -95,6 +106,15 @@ class PurchaseDetailController extends Controller
     public function edit(Request $request,$id)
     {
 
+        $purchase = Purchase::find($request['purchase_id']);
+
+        if($purchase->purchaseStatus->purchaseStatusSequence > 1)
+        {
+            return redirect()->route('purchase.show',$purchase->id)
+
+                ->with('Incorrecto','No se puede editar productos por el estado actual');
+        }
+
         return view('purchasedetail.edit',[
 
             'purchasedetail' => PurchaseDetail::where('purchase_id','=',$request['purchase_id'])
@@ -113,6 +133,7 @@ class PurchaseDetailController extends Controller
     public function update(Request $request)
     {
 
+
         $this->validate(request(),[
 
             'purchase_id' => 'required',
@@ -124,6 +145,17 @@ class PurchaseDetailController extends Controller
             'productPurchaseCost' => 'required|numeric|min:1'
 
         ]);
+
+        $purchase = Purchase::find($request['purchase_id']);
+
+        if($purchase->purchaseStatus->purchaseStatusSequence > 1)
+        {
+
+            return redirect()->route('purchase.show',$purchase->id)
+
+                ->with('Incorrecto','La compra editar productos por el estado actual');
+
+        }
 
         DB::table('purchase_details')
 
@@ -154,6 +186,15 @@ class PurchaseDetailController extends Controller
 
         $purchasedetail = $request->all();
         $purchase_id = $purchasedetail['purchase_id'];
+        $purchase = Purchase::find($request['purchase_id']);
+
+        if($purchase->purchaseStatus->purchaseStatusSequence > 1)
+        {
+            return redirect()->route('purchase.show',$purchase->id)
+
+                ->with('Incorrecto','No se permite eliminar productos, por el estado actual');
+        }
+
 
         PurchaseDetail::where('purchase_id','=',$request['purchase_id'])
             ->where('product_id','=',$request['product_id'])->delete();

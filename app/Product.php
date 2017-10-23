@@ -19,29 +19,32 @@ class Product extends Model
     
     protected $fillable = [
 
-                            'id',
 
-                            'productPicture',
+        'id',
 
-    						'productName',
+         'productPicture',
 
-    						'productDescription',
+        'productName',
 
-    						'productCost',
+        'productDescription',
 
-    						'productPrice',
+        'productCost',
 
-    						'productQuantity',
+        'productPrice',
 
-    						'category_id',
+        'productQuantity',
 
-    						'brand_id',
+        'category_id',
 
-    						'color_id',
+        'brand_id',
 
-    						'supplier_id'
+        'color_id',
 
-    						];
+        'supplier_id',
+
+        'productDiscount'
+
+    ];
 
     public function brands()
     {

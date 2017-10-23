@@ -27,21 +27,21 @@ class ProductMeasure extends Model
     public function magnitudes()
     {
 
-    	return $this->belognsTo(Magnitude::class,'magnitude_id','id');
+    	return $this->belongsTo(Magnitude::class,'magnitude_id','id');
 
     }
 
     public function metric()
     {
 
-    	return $this->belognsTo(Metric::class,'metric_id','id');
+    	return $this->belongsTo(Metric::class,'metric_id','id');
 
     }
 
     public function products()
     {
 
-    	return $this->belognsTo(Product::class,'product_id','id');
+    	return $this->belongsTo(Product::class,'product_id','id');
 
     }
     

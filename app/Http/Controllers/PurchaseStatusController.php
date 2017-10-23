@@ -39,7 +39,9 @@ class PurchaseStatusController extends Controller
 
             'purchaseStatusName' => 'required',
 
-            'purchaseStatusDescription' => 'required'
+            'purchaseStatusDescription' => 'required',
+
+            'purchaseStatusSequence' => 'required'
 
         ]);
 
@@ -93,7 +95,9 @@ class PurchaseStatusController extends Controller
 
             'purchaseStatusName' => 'required',
 
-            'purchaseStatusDescription' => 'required'
+            'purchaseStatusDescription' => 'required',
+
+            'purchaseStatusSequence' => 'required'
 
         ]);
 

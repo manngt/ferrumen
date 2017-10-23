@@ -59,7 +59,7 @@ class Sale extends Model
             $total += $sd->getTotalPrice();
         }
 
-        return $total;
+        return round($total,2);
 
     }
 
@@ -72,6 +72,52 @@ class Sale extends Model
             $total += $payment->paymentAmount;
         }
 
-        return $total;
+        return round($total,2);
+    }
+
+    public function isPaided()
+    {
+
+        if($this->diffAmount() == 0)
+        {
+            return true;
+        }
+        else
+        {
+
+            return false;
+
+        }
+    }
+
+    public function diffAmount()
+    {
+
+        return round($this->getTotalAmount() - $this->getTotalPaymentAmount(),2);
+
+    }
+
+    public function isFinished()
+    {
+        if($this->saleStatus->saleStatusName == 'FINALIZADA')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function isCanceled()
+    {
+        if($this->saleStatus->saleStatusName == 'CANCELADA')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

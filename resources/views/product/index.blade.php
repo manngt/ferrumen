@@ -78,6 +78,14 @@
                                             <td style="vertical-align: middle;" >{{ $product->productQuantity}} </td>
                                             <td style="vertical-align: middle;" >
 
+                                                {!! Form::open(['method' => 'GET','route' => ['product.show', $product->id], 'style'=>'display:inline']) !!}
+
+                                                <button type="submit" class="btn" style="background-color:transparent;">
+                                                    <li class="fa fa-eye" style="color:#00BFFF; font-size: 20px; "></li>
+                                                </button>
+
+                                                {!! Form::close() !!}
+
                                             {!! Form::open(['method' => 'GET','route' => ['product.edit', $product->id], 'style'=>'display:inline']) !!}
                                                 
                                                 <button type="submit" class="btn" style="background-color:transparent;">

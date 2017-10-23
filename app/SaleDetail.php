@@ -19,6 +19,8 @@ class SaleDetail extends Model
 
         'productSalePrice',
 
+        'productSaleDiscount'
+
     ];
 
     public function sale()
@@ -38,7 +40,12 @@ class SaleDetail extends Model
     public function getTotalPrice()
     {
 
-        return $this->productSaleQuantity * $this->productSalePrice;
+        return ($this->productSaleQuantity * $this->productSalePrice) - $this->productSaleDiscount;
 
+    }
+
+    public function getDiscount()
+    {
+        return $this->productQuantity * $this->productSaleDiscount;
     }
 }

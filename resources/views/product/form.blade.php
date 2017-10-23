@@ -24,7 +24,7 @@
 
 </div>
 
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-3">
 
 	{!! Form::label('productCostLabel','Costo') !!}
 
@@ -32,7 +32,7 @@
 	
 </div>
 
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-3">
 
 	{!! Form::label('productPriceLabel','Precio') !!}
 
@@ -40,7 +40,15 @@
 	
 </div>
 
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-3">
+
+    {!! Form::label('productDiscountLabel','Descuento') !!}
+
+    {!! Form::number('productDiscount',null, array('placeholder' => 'Descuento de venta','class' => 'form-control','step'=>'any')) !!}
+
+</div>
+
+<div class="form-group col-sm-3">
 	
 	{!! Form::label('productQuantityLabel','Existencias') !!}
 

@@ -17,11 +17,28 @@ class HomeController extends Controller
         $statusreceived_id = PurchaseStatus::where('purchaseStatusName','=','RECIBIDA')->first()->id;
         $purchasequantity = count(Purchase::all());
         $purchasereceived = count(Purchase::where('purchaseStatus_id','=',$statusreceived_id)->get());
-        $purchasepercent = round(($purchasereceived/$purchasequantity) * 100,0);
+
+        if($purchasequantity>0)
+        {
+            $purchasepercent = round(($purchasereceived/$purchasequantity) * 100,0);
+        }
+        else{
+            $purchasepercent = 0;
+        }
+
 
         $productlowquantity = count(Product::where('productQuantity','<',10)->get());
         $productquantity = count(Product::all());
-        $productpercent = round(($productlowquantity/$productquantity)*100,0);
+
+        if($productlowquantity>0)
+        {
+            $productpercent = round(($productlowquantity/$productquantity)*100,0);
+        }
+        else
+        {
+            $productpercent=0;
+        }
+
 
         $mostrecentsales = Sale::latest()->paginate(5);
 

@@ -13,7 +13,9 @@ class PurchaseStatus extends Model
 
         'purchaseStatusName',
 
-        'purchaseStatusDescription'
+        'purchaseStatusSequence',
+
+        'purchaseStatusDescription',
 
     ];
 

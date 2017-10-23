@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
 use App\SaleDetail;
 use Illuminate\Http\Request;
 use App\Product;
@@ -55,7 +56,17 @@ class SaleDetailController extends Controller
 
         ]);
 
+        $sale = Sale::find($request['sale_id']);
+
+        if($sale->isFinished() || $sale->isCanceled())
+        {
+            return redirect()->route('sale.show',$sale->id)
+
+                ->with('Incorrecto','La venta esta finalizada o cancelada');
+        }
+
         $saledetail = $request->all();
+
 
         $sd = SaleDetail::where('sale_id','=',$saledetail['sale_id'])
             ->where('product_id','=',$saledetail['product_id'])->first();
@@ -73,6 +84,12 @@ class SaleDetailController extends Controller
         }
 
         $saledetail['id'] = time();
+
+        $productdiscount = Product::find($saledetail['product_id'])->productDiscount;
+
+        $discount = $productdiscount * $saledetail['productSaleQuantity'];
+
+        $saledetail['productSaleDiscount'] = $discount;
 
         $saledetail['productSalePrice'] = Product::find($saledetail['product_id'])->productPrice;
 
@@ -109,6 +126,17 @@ class SaleDetailController extends Controller
     public function edit($id)
     {
 
+        $saledetail = SaleDetail::find($id);
+
+        $sale = Sale::find($saledetail->sale_id);
+
+        if($sale->isFinished() || $sale->isCanceled())
+        {
+            return redirect()->route('sale.show',$sale->id)
+
+                ->with('Incorrecto','La venta esta finalizada o cancelada');
+        }
+
         return view('saledetail.edit',[
 
             'saledetail' => SaleDetail::find($id)
@@ -136,6 +164,25 @@ class SaleDetailController extends Controller
 
         ]);
 
+        $sale = Sale::find($request['sale_id']);
+
+        if($sale->isFinished() || $sale->isCanceled())
+        {
+            return redirect()->route('sale.show',$sale->id)
+
+                ->with('Incorrecto','La venta esta finalizada o cancelada');
+        }
+
+        $saledetail = $request->all();
+
+
+        $sd = SaleDetail::where('sale_id','=',$saledetail['sale_id'])
+            ->where('product_id','=',$saledetail['product_id'])->first();
+
+        $productdiscount = Product::find($request['product_id'])->productDiscount;
+
+        $request['productSaleDiscount'] = $request['productSaleQuantity'] * $productdiscount;
+
         SaleDetail::find($id)->update($request->all());
 
         return redirect()->route('sale.show',$request['sale_id'])
@@ -154,14 +201,29 @@ class SaleDetailController extends Controller
 
         $saledetail = SaleDetail::find($id);
 
+        $sale = Sale::find($saledetail->sale_id);
+
+        if(count($sale->payment) >0)
+        {
+            return redirect()->route('sale.show',$sale->id)
+                ->with('Incorrecto','No puede quitar productos, hay pagos aplicados');
+        }
+
+        if($sale->isFinished() || $sale->isCanceled())
+        {
+            return redirect()->route('sale.show',$sale->id)
+
+                ->with('Incorrecto','La venta esta finalizada o cancelada');
+        }
+
         Product::find($saledetail['product_id'])->increase($saledetail['product_id'],$saledetail->productSaleQuantity);
 
-        $sale = $saledetail->sale_id;
+        $saleid = $saledetail->sale_id;
 
         $saledetail->delete();
 
 
-        return redirect()->route('sale.show',$sale)
+        return redirect()->route('sale.show',$saleid)
             ->with('Correcto','Producto removido de la venta');
 
     }

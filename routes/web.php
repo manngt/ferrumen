@@ -69,5 +69,7 @@ Route::resource('saledetail','SaleDetailController');
 
 Route::resource('payment','PaymentController');
 
+Route::resource('productmeasure','ProductMeasureController');
+
 
 

@@ -42,6 +42,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br>
+                                <br>
+                                <div class="col-md-5" style="background-color:white;">
+
+                                    <div class="form-group">
+
+                                        {!! Form::label('purchaseStatus', 'Estado',array('class'=>'col-sm-4')) !!}
+                                        <div class="col-sm-5">
+                                            {!! Form::text('supplier_id', $purchase->purchaseStatus->purchaseStatusName, array('disabled'=>'disabled','class' =>
+'form-control')) !!}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-3 target" style="background-color:white;">
                                     <div class="form-group">
                                         {!! Form::label('idLabel', 'ID',array('class'=>'col-sm-2')) !!}
@@ -58,13 +71,33 @@
                                 <div class="col-md-6">
                                     <address>
                                         <strong class="">FERRUMEN, S.A.</strong><br class="">
-                                        5ta. Avenida 30-77 Zona 3 <br class="">
+                                        5ta. Avenida 30-77<br class="">
                                         Zona 3<br class="">
                                         Guatemala<br class="">
                                     </address>
                                 </div>
                             </div> <!-- row -->
                         </div> <!-- panel heading -->
+
+                        <div class="row panel-heading">
+
+                            {!! Form::model($purchase, ['method' => 'PATCH','route' => ['purchase.update', $purchase->id]]) !!}
+
+                            {{ Form::text('supplier_id', $purchase->supplier_id, array('hidden' => 'hidden')) }}
+
+                            {{ Form::text('purchaseReceptionDate', $purchase->purchaseReceptionDate, array('hidden' => 'hidden')) }}
+
+                            {!! Form::label('purchaseStatusLabel', 'Estado') !!}
+
+                            {!! Form::select('purchaseStatus_id', $purchasestatus,null, array('class' => 'form-control')) !!}
+
+                            <br>
+
+                            {!!Form::submit('Guardar',array('class'=>'btn btn-success'))!!}
+
+                            {!! Form::close() !!}
+
+                        </div>
                         <div   class="row panel-heading">
                             {!! Form::open(array('route' => 'purchasedetail.store','method'=>'POST','files'=>'true')) !!}
                             <div class="col-md-12" style="background-color:white;">
@@ -125,25 +158,6 @@
                             {!! Form::close() !!}
                         </div>
 
-                        <div class="row panel-heading">
-
-                            {!! Form::model($purchase, ['method' => 'PATCH','route' => ['purchase.update', $purchase->id]]) !!}
-
-                                {{ Form::text('supplier_id', $purchase->supplier_id, array('hidden' => 'hidden')) }}
-
-                                {{ Form::text('purchaseReceptionDate', $purchase->purchaseReceptionDate, array('hidden' => 'hidden')) }}
-
-                                {!! Form::label('purchaseStatusLabel', 'Estado') !!}
-
-                                {!! Form::select('purchaseStatus_id', $purchasestatus,null, array('class' => 'form-control')) !!}
-
-                                <br>
-
-                                {!!Form::submit('Guardar',array('class'=>'btn btn-success'))!!}
-
-                            {!! Form::close() !!}
-
-                        </div>
 
 
                         <div class="panel-body">

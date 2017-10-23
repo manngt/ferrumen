@@ -50,4 +50,30 @@ class Purchase extends Model
 
         return $total;
     }
+
+    public function isReceived()
+    {
+        if($this->purchaseStatus->purchaseStatusName == 'RECIBIDA')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function isCanceled()
+    {
+
+        if($this->purchaseStatus->pruchaseStatusName == 'CANCELDA')
+        {
+            return true;
+        }
+        else
+        {
+
+            return false;
+        }
+    }
 }
