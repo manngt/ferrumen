@@ -2,6 +2,11 @@
 
 @section('content')
 
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title col-sm-8">Proveedor</h4> </div>
+    </div>
+
     <div class="row white-box">
 
         <div class="row bg-title col-sm-8">

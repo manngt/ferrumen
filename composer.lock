@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a34f5c6f0810ab9c6d153f9ec77a95e",
+    "content-hash": "5fe5480f857996a0d3c909962b007e02",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1236,6 +1236,49 @@
             "time": "2017-09-22T20:46:04+00:00"
         },
         {
+            "name": "reportico/laravel-reportico",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reportico-web/laravel-reportico.git",
+                "reference": "38b80d51875caf4dcc40f87d3be3a3a991b47a47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reportico-web/laravel-reportico/zipball/38b80d51875caf4dcc40f87d3be3a3a991b47a47",
+                "reference": "38b80d51875caf4dcc40f87d3be3a3a991b47a47",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.2",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations",
+                    "src/controllers"
+                ],
+                "files": [
+                    "src/Reportico/Reportico/reportico.php"
+                ],
+                "psr-0": {
+                    "Reportico\\Reportico\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Reportico",
+                    "email": "info@reportico.org"
+                }
+            ],
+            "time": "2017-04-10 17:00:17"
+        },
+        {
             "name": "sabberworm/php-css-parser",
             "version": "8.1.0",
             "source": {
@@ -2395,37 +2438,40 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8e6e04167378abf1ddb4d3522d8755c5fd90d102",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "doctrine/collections": "1.*",
-                "phpunit/phpunit": "~4.1"
+                "doctrine/collections": "^1.0",
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^4.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "DeepCopy\\": "src/DeepCopy/"
-                }
+                },
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Create deep copies (clones) of your objects",
-            "homepage": "https://github.com/myclabs/DeepCopy",
             "keywords": [
                 "clone",
                 "copy",
@@ -2433,7 +2479,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-04-12T18:52:22+00:00"
+            "time": "2017-10-19T19:58:43+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3655,7 +3701,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "reportico/laravel-reportico": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

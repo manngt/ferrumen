@@ -71,5 +71,9 @@ Route::resource('payment','PaymentController');
 
 Route::resource('productmeasure','ProductMeasureController');
 
+Route::get('/report', function () {
+    return view('report.index');
+});
+
 
 

@@ -2,10 +2,23 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="row bg-title">
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2">
+            <h4 class="page-title col-sm-6">Producto</h4> </div>
+        <div class="pull-right col-sm-2">
+            <a class="btn btn-primary" style="background-color:#85B4D0;" href="{{ route('product.index') }}"> Regresar</a>
+
+        </div>
+
+        <!-- /.col-lg-12 -->
+    </div>
 
     <div class="white-box">
 
+
+
         <div class="row">
+
 
             <div class="col-sm-4">
 

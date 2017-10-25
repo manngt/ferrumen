@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Magnitude;
 use App\Metric;
 use App\ProductMeasure;
@@ -18,6 +19,7 @@ use App\Color;
 use DB;
 
 use App\Supplier;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -73,6 +75,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate(request(),[
 
             'productName' => 'required',
@@ -97,6 +100,15 @@ class ProductController extends Controller
 
         $product = $request->all();
 
+        $diff = $product['productPrice'] - $product['productDiscount'];
+
+        if($diff<1)
+        {
+            return Redirect::back()
+
+                ->with('Incorrecto','El descuento tiene que ser menor al precio');
+
+        }
         $product['id'] = time();
 
         $product['productName'] = strtoupper($request['productName']);
