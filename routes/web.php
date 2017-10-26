@@ -29,6 +29,8 @@ Route::get('/form', function () {
     return view('form');
 });
 
+//Route::resource('/','HomeController');
+
 Route::resource('/','HomeController');
 
 Route::resource('brand','BrandController');
@@ -73,7 +75,9 @@ Route::resource('productmeasure','ProductMeasureController');
 
 Route::get('/report', function () {
     return view('report.index');
-});
+})->middleware('auth');
 
 
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');

@@ -2,18 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use App\Purchase;
-use App\PurchaseStatus;
-use App\Sale;
 use Illuminate\Http\Request;
+
+use App\PurchaseStatus;
+
+use App\Purchase;
+
+use App\Product;
+
+use App\Sale;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-
+        //return view('home');
         $statusreceived_id = PurchaseStatus::where('purchaseStatusName','=','RECIBIDA')->first()->id;
         $purchasequantity = count(Purchase::all());
         $purchasereceived = count(Purchase::where('purchaseStatus_id','=',$statusreceived_id)->get());
@@ -45,20 +63,20 @@ class HomeController extends Controller
 
         return view('index',[
 
-                'purchasequantity' => $purchasequantity,
+            'purchasequantity' => $purchasequantity,
 
-                'purchasereceived' => $purchasereceived,
+            'purchasereceived' => $purchasereceived,
 
-                'purchasepercent' => $purchasepercent,
+            'purchasepercent' => $purchasepercent,
 
-                'productlowquantity' => $productlowquantity,
+            'productlowquantity' => $productlowquantity,
 
-                'productquantity' => $productquantity,
+            'productquantity' => $productquantity,
 
-                'productpercent' => $productpercent,
+            'productpercent' => $productpercent,
 
-                'mostrecentsales' => $mostrecentsales
+            'mostrecentsales' => $mostrecentsales
 
-            ]);
+        ]);
     }
 }

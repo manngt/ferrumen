@@ -17,7 +17,7 @@
                             <h3 class="box-title">Listado</h3>
                             @include('layouts.error')
                             <div class="table-responsive">
-                                <table class="table">
+                                <table id="myTable" class="table table-responsive">
                                     <thead>
                                         <tr>
                                             <th>Código</th>
@@ -60,6 +60,8 @@
                                 </table>
 
                             </div>
+
+                            @include('layouts.datatable')
 
                         </div>
 

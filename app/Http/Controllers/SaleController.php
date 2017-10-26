@@ -21,6 +21,11 @@ use App\Payment;
 class SaleController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function searchsale(Request $request)
     {
         $customers_ids = [];

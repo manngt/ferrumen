@@ -24,6 +24,11 @@ use Illuminate\Support\Facades\Redirect;
 class ProductController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function searchProduct(Request $request)
     {
         $text = $request['search'];
