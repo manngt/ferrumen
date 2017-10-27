@@ -17,9 +17,9 @@
 */
 
 
-Route::get('/user', function () {
+/*Route::get('/user', function () {
     return view('users');
-});
+});*/
 
 Route::get('/productdetail', function () {
     return view('productdetail');
@@ -30,6 +30,8 @@ Route::get('/form', function () {
 });
 
 //Route::resource('/','HomeController');
+
+Route::resource('user','UserController');
 
 Route::resource('/','HomeController');
 
@@ -70,6 +72,8 @@ Route::resource('sale','SaleController');
 Route::resource('saledetail','SaleDetailController');
 
 Route::resource('payment','PaymentController');
+
+
 
 Route::resource('productmeasure','ProductMeasureController');
 

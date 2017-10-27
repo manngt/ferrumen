@@ -43,11 +43,16 @@
                     <li>
                         <a href="/sale" class="waves-effect"><i class="fa fa-money fa-fw" aria-hidden="true"></i><span class="hide-menu">Ventas</span></a>
                     </li>
+                    <li>
+                        <a href="/user" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i><span class="hide-menu">Usuarios</span></a>
+                    </li>
                     <li class="dropdown">
                     <a href="#" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Catalogos</span></a>
                         <ul class="dropdown">
                             <li style="padding: 10px 0 0;"><a class="waves-effect" href="{{ route('brand.index') }}" class="waves-effect"> <span class= "hide-menu">Marcas</span></a></li>
                             <li style="padding: 10px 0 0;"><a class="waves-effect" href="{{ route('color.index') }}" class="waves-effect"> <span class="hide-menu">Colores</span></a></li>
+                            <li style="padding: 10px 0 0;"><a class="waves-effect" href="{{ route('magnitude.index') }}" class="waves-effect"> <span class="hide-menu">Medidas</span></a></li>
+                            <li style="padding: 10px 0 0;"><a class="waves-effect" href="{{ route('metric.index') }}" class="waves-effect"> <span class="hide-menu">Unidades de medida</span></a></li>
                             <li style="padding: 10px 0 0;"><a class="waves-effect" href="{{ route('category.index') }}" class="waves-effect"> <span class="hide-menu">Categorías</span></a></li>
                             <li style="padding: 10px 0 0;"><a class="waves-effect" href="{{ route('supplier.index') }}" class="waves-effect"> <span class="hide-menu">Proveedores</span></a></li>
                             <li style="padding: 10px 0 0;"><a class="waves-effect" href="{{ route('purchasestatus.index') }}" class="waves-effect"> <span class="hide-menu">Estados de compra</span></a></li>

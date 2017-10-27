@@ -167,6 +167,10 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th>Color</th>
+                                <th style="background-color: {{$product->colors->colorHex}}"></th>
+                            </tr>
+                            <tr>
                                 <th>Medida</th>
                                 <th>Metrica</th>
                                 <th>Medición</th>
