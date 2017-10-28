@@ -1,6 +1,6 @@
 <nav style="max-height: auto; overflow-x: auto;" class="navbar navbar-default navbar-static-top m-b-0">
             <div style="background-color: #353232" class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
-                <div class="top-left-part"><a class="logo" href="/"><b><img class ="visible-lg" style="width: 200px; height: auto" src="/images/ferrumenlogo.jpeg" alt="home" /></b><span class="hidden-xs"></span></a></div>
+                <div style="margin-top: 1%;margin-left: 2%;margin-right: 2%;margin-bottom: 0%" class="top-left-part"><a class="logo" href="/"><b><img class ="visible-lg" style="width: 200px; height: auto" src="/images/ferrumenlogo.jpeg" alt="home" /></b><span class="hidden-xs"></span></a></div>
                 <ul style="background-color: #353232" class="nav navbar-top-links navbar-right pull-right">
 
                     <li>
