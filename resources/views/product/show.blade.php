@@ -101,11 +101,11 @@
                     <p>
                         <strong>Fila: </strong>
 
-                        {{ $product->$product->productRowLocation }}
+                        {{ $product->productRowLocation }}
 
                         <strong>Columna: </strong>
 
-                        {{ $product->$product->productColumnLocation }}
+                        {{ $product->productColumnLocation }}
 
                     </p>
 
