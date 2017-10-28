@@ -33,7 +33,8 @@ class HomeController extends Controller
     {
         //return view('home');
         $statusreceived_id = PurchaseStatus::where('purchaseStatusName','=','RECIBIDA')->first()->id;
-        $purchasequantity = count(Purchase::all());
+        $statuscanceled_id = PurchaseStatus::where('purchaseStatusName','=','CANCELADA')->first()->id;
+        $purchasequantity = count(Purchase::where('purchaseStatus_id','!=',$statuscanceled_id)->get());
         $purchasereceived = count(Purchase::where('purchaseStatus_id','=',$statusreceived_id)->get());
 
         if($purchasequantity>0)
