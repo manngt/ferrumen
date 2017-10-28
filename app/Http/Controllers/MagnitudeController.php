@@ -11,13 +11,30 @@ class MagnitudeController extends Controller
 
     public function __construct()
     {
+
         $this->middleware('auth');
+
+    }
+
+    public function searchMagnitude(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('magnitude.index',[
+
+            'magnitudes'=> Magnitude::where('magnitudeName','like','%'.$text.'%')
+
+                ->paginate(20)
+
+        ]);
+
     }
     
     public function index()
     {
 
-    	$magnitudes = Magnitude::all();
+    	$magnitudes = Magnitude::paginate(20);
         
         return view('magnitude.index',compact('magnitudes'));
     }

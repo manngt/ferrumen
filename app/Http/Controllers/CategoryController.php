@@ -11,13 +11,29 @@ class CategoryController extends Controller
 
     public function __construct()
     {
+
         $this->middleware('auth');
+
+    }
+
+    public function searchCategory(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('category.index',[
+
+            'categories'=> Category::where('categoryName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
     }
     
     public function index()
     {
 
-        $categories = Category::all();
+        $categories = Category::paginate(20);
         
         return view('category.index',compact('categories'));
     }

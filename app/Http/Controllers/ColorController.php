@@ -16,12 +16,29 @@ class ColorController extends Controller
 
     public function __construct()
     {
+
         $this->middleware('auth');
+
     }
+
+    public function searchColor(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('color.index',[
+
+            'colors'=> Color::where('colorName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
+
     public function index()
     {
 
-        $colors = Color::all();
+        $colors = Color::paginate(20);
         
         return view('color.index',compact('colors'));
     }

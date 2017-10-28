@@ -13,10 +13,24 @@ class PurchaseStatusController extends Controller
         $this->middleware('auth');
     }
 
+    public function searchPurchaseStatus(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('purchasestatus.index',[
+
+            'purchasestatuses'=> PurchaseStatus::where('purchaseStatusName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
+
     public function index()
     {
 
-        $purchasestatuses = PurchaseStatus::all();
+        $purchasestatuses = PurchaseStatus::paginate(20);
 
         return view('purchasestatus.index',compact('purchasestatuses'));
     }

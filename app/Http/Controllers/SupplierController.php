@@ -13,11 +13,25 @@ class SupplierController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function searchSupplier(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('supplier.index',[
+
+            'suppliers'=> Supplier::where('supplierName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
     
     public function index()
     {
 
-    	$suppliers = Supplier::all();
+    	$suppliers = Supplier::paginate(20);
         
         return view('supplier.index',compact('suppliers'));
     }

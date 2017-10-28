@@ -11,9 +11,48 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->
+
+    <div>
+        {!! $salestatuses->appends(Request::only('search'))->links(); !!}
+    </div>
                 <div class="row">
                     <div class="col-sm-12 ">
                         <div class="white-box">
+
+                            <div class="row col-sm-12">
+
+                                <div class="col-xs-6 col-sm-6 pull-right">
+
+                                    {!! Form::open(array('method'=>'GET','url' => '/searchsalestatus', 'class'=>'form navbar-form navbar-right searchform')) !!}
+
+                                    <div class="input-group">
+
+                                        {!! Form::text('search', null,
+                                                           array('required',
+                                                                'class'=>'form-control',
+                                                                'placeholder'=>'Buscar')) !!}
+
+                                        <div class="input-group-btn">
+
+                                            {!! Form::submit('Buscar', array('class'=>'btn btn-default')) !!}
+
+                                            <a class="btn btn-default" href="{{ route('salestatus.index') }}">
+                                                <li class="fa fa-trash-o"></li>
+                                            </a>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {!! Form::close() !!}
+
+                                </div>
+
+
+                            </div>
+
                             <h3 class="box-title">Listado</h3>
                             @include('layouts.error')
                             <div class="table-responsive">
@@ -69,6 +108,10 @@
 
                 </div>
                 <!-- /.row -->
+
+    <div>
+        {!! $salestatuses->appends(Request::only('search'))->links(); !!}
+    </div>
 
 </div>
 

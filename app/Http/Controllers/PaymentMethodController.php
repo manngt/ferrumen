@@ -10,13 +10,30 @@ class PaymentMethodController extends Controller
 {
     public function __construct()
     {
+
         $this->middleware('auth');
+
+    }
+
+    public function searchPaymentMethod(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('paymentmethod.index',[
+
+            'paymentmethods'=> PaymentMethod::where('paymentMethodName','like','%'.$text.'%')
+
+                ->paginate(20)
+
+        ]);
+
     }
 
     public function index()
     {
 
-        $paymentmethods = Paymentmethod::latest()->get();
+        $paymentmethods = Paymentmethod::latest()->paginate(20);
 
         return view('paymentmethod.index',compact('paymentmethods'));
     }

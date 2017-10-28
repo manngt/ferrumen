@@ -13,11 +13,25 @@ class MetricController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function searchMetric(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('metric.index',[
+
+            'metrics'=> Metric::where('metricName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
     
     public function index()
     {
 
-    	$metrics = Metric::all();
+    	$metrics = Metric::paginate(20);
         
         return view('metric.index',compact('metrics'));
     }

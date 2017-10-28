@@ -7,12 +7,32 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+
+        $this->middleware('auth');
+
+    }
+
+    public function searchUser(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('user.index',[
+
+            'users'=> User::where('name','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
 
     public function index()
     {
         return view('user.index',[
 
-            'users' => User::all()
+            'users' => User::paginate(20)
 
         ]);
     }

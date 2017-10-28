@@ -112,7 +112,9 @@ class PurchaseController extends Controller
             'products' => Product::where('supplier_id','=', $supplier)
                 ->pluck('productName','id'),
 
-            'purchasestatus' => PurchaseStatus::pluck('purchaseStatusName','id')
+            'purchasestatus' => PurchaseStatus::orderby('purchaseStatusSequence')
+
+                ->pluck('purchaseStatusName','id')
 
         ]);
     }

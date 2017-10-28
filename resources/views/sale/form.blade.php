@@ -23,13 +23,6 @@
 
 </div>
 
-<div class="form-group">
-
-    {!! Form::label('issueDateLabel', 'Fecha de emisión') !!}
-
-    {!! Form::text('issueDate', null, array('placeholder' => 'Cuando se emite','class' =>
-'form-control')) !!}
-
 
 <div class="form-group text-center">
 

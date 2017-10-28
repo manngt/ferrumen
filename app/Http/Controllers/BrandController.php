@@ -20,10 +20,24 @@ class BrandController extends Controller
 
     }
 
+    public function searchBrand(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('brand.index',[
+
+            'brands'=> Brand::where('brandName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
+
     public function index()
     {
 
-    	$brands = Brand::all();
+    	$brands = Brand::paginate(20);
         
         return view('brand.index',compact('brands'));
     }

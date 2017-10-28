@@ -13,10 +13,24 @@ class CustomerController extends Controller
         $this->middleware('auth');
     }
 
+    public function searchCustomer(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('customer.index',[
+
+            'customers'=> Customer::where('customerName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
+
     public function index()
     {
 
-        $customers = Customer::latest()->get();
+        $customers = Customer::latest()->paginate(20);
 
 
         return view('customer.index',compact('customers'));

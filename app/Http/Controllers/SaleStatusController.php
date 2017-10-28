@@ -13,11 +13,26 @@ class SaleStatusController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
+    public function searchSaleStatus(Request $request)
+    {
+        $text = $request['search'];
+
+
+        return view('salestatus.index',[
+
+            'salestatuses'=> SaleStatus::where('saleStatusName','like','%'.$text.'%')
+                ->paginate(20)
+
+        ]);
+
+    }
+
+
     public function index()
     {
 
-        $salestatuses = SaleStatus::latest()->get();
+        $salestatuses = SaleStatus::latest()->paginate(20);
 
         return view('salestatus.index',compact('salestatuses'));
     }
