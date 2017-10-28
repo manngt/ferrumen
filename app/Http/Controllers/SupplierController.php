@@ -59,7 +59,13 @@ class SupplierController extends Controller
 
             'supplierName' => 'required',
 
-            'supplierNit' => 'required'
+            'supplierNit' => 'required',
+
+            'supplierPhone' => 'required|numeric|max:99999999',
+
+            'supplierEmail' => 'required|email',
+
+            'supplierAddress' => 'required'
 
         ]);
 
@@ -116,6 +122,10 @@ class SupplierController extends Controller
             'supplierName' => 'required',
 
             'supplierNit' => 'required',
+
+            'supplierPhone' => 'required|numeric|max:99999999',
+
+            'supplierEmail' => 'required|email',
 
             'supplierAddress' => 'required'
 

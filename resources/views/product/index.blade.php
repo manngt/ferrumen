@@ -61,6 +61,7 @@
                                             <th>Código</th>
                                             <th>Imagen</th>
                                             <th>Producto</th>
+                                            <th>Area de bodega</th>
                                             <th>Costo</th>
                                             <th>Precio</th>
                                             <th>Existencias</th>
@@ -73,6 +74,7 @@
                                             <td style="vertical-align: middle;" >{{ $product->id}}</td>
                                             <td style="vertical-align: middle;" ><img height="100" width="100" class="img-circle" src="/images/{{ $product->productPicture}}"> </td>
                                             <td style="vertical-align: middle;" >{{ $product->productName}} </td>
+                                            <td style="vertical-align: middle;" >{{ 'Fila: '.$product->productRowLocation}}<br>{{'Columna: '.$product->productColumnLocation}} </td>
                                             <td style="vertical-align: middle;" >{{ $product->productCost}} </td>
                                             <td style="vertical-align: middle;" >{{ $product->productPrice}} </td>
                                             <td style="vertical-align: middle;" >{{ $product->productQuantity}} </td>

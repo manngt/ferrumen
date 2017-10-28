@@ -58,6 +58,22 @@
 
 <div class="form-group col-sm-6">
 
+    {!! Form::label('productRowLocationLabel','Fila') !!}
+
+    {!! Form::number('productRowLocation',null, array('placeholder' => 'Fila de la bodega', 'class' => 'form-control')) !!}
+
+</div>
+
+<div class="form-group col-sm-6">
+
+    {!! Form::label('productColumnLocationLabel','Columna') !!}
+
+    {!! Form::number('productColumnLocation',null, array('placeholder' => 'Columna de la bodega', 'class' => 'form-control')) !!}
+
+</div>
+
+<div class="form-group col-sm-6">
+
 	{!! Form::label('categoryLabel', 'Categoría') !!}
 
     {!! Form::select('category_id', $categories,null, array('class' => 'form-control')) !!}

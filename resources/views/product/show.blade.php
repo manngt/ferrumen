@@ -99,6 +99,21 @@
                 <div class="row">
 
                     <p>
+                        <strong>Fila: </strong>
+
+                        {{ $product->$product->productRowLocation }}
+
+                        <strong>Columna: </strong>
+
+                        {{ $product->$product->productColumnLocation }}
+
+                    </p>
+
+                </div>
+
+                <div class="row">
+
+                    <p>
                         {!! Form::open(array('route' => 'productmeasure.store','method'=>'POST','files'=>'true')) !!}
                         <div class="col-md-6" style="background-color:white;">
 

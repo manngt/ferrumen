@@ -1,7 +1,7 @@
-<nav class="navbar navbar-default navbar-static-top m-b-0">
-            <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
-                <div class="top-left-part"><a class="logo" href="index.html"><b><img src="/plugins/images/pixeladmin-logo.png" alt="home" /></b><span class="hidden-xs"><img src="/plugins/images/pixeladmin-text.png" alt="home" /></span></a></div>
-                <ul class="nav navbar-top-links navbar-right pull-right">
+<nav style="max-height: auto; overflow-x: auto;" class="navbar navbar-default navbar-static-top m-b-0">
+            <div style="background-color: #353232" class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
+                <div class="top-left-part"><a class="logo" href="index.html"><b><img style="width: 200px; height: auto" src="/images/ferrumenlogo.jpeg" alt="home" /></b><span class="hidden-xs"></span></a></div>
+                <ul style="background-color: #353232" class="nav navbar-top-links navbar-right pull-right">
 
                     <li>
                         <a href="{{ route('logout') }}"
@@ -22,7 +22,7 @@
             <!-- /.navbar-static-side -->
         </nav>
         <!-- Left navbar-header -->
-        <div class="navbar-default sidebar" role="navigation">
+        <div style="background-color: #74777b" class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">

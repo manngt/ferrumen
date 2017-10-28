@@ -42,7 +42,11 @@ class Product extends Model
 
         'supplier_id',
 
-        'productDiscount'
+        'productDiscount',
+
+        'productRowLocation',
+
+        'productColumnLocation'
 
     ];
 
