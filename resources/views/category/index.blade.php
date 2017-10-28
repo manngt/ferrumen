@@ -70,7 +70,7 @@
                                         <tr>
                                             <td style="vertical-align: middle;" >{{ $category->id}}</td>
                                             <td style="vertical-align: middle;" >{{ $category->categoryName}} </td>
-                                            <td style="vertical-align: middle;" >{{ $category->categoryDescription}}</td>
+                                            <td style="vertical-align: middle; width: 200px" >{{ $category->categoryDescription}}</td>
                                             <td style="vertical-align: middle;" >
 
                                             {!! Form::open(['method' => 'GET','route' => ['category.edit', $category->id], 'style'=>'display:inline']) !!}
