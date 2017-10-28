@@ -71,6 +71,7 @@
                             <tr>
                                 <th>Cliente</th>
                                 <th>Fecha</th>
+                                <th>Estado</th>
                                 <th>Monto</th>
                             </tr>
                             </thead>
@@ -79,6 +80,7 @@
                                 <tr>
                                     <td style="vertical-align: middle;" >{{ $sale->customer->customerName}} </td>
                                     <td style="vertical-align: middle;" >{{ $sale->issueDate}} </td>
+                                    <td style="vertical-align: middle;" >{{ $sale->saleStatus->saleStatusName}} </td>
                                     <td class="">{{ 'Q. '.number_format($sale->getTotalAmount(),2) }}</td>
 
                                 </tr>
