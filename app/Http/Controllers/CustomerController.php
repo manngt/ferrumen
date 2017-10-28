@@ -112,7 +112,7 @@ class CustomerController extends Controller
 
         $this->validate(request(),[
 
-            'customerName' => 'required|alpha',
+            'customerName' => 'required',
 
             'customerEmail' => 'email',
 
